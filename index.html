@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeX - Live Stock Tracker</title>
+
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+   <link rel="stylesheet" href="src/output.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #0B0E14;
+      color: #ffffff;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #111827;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 10px;
+    }
+
+    /* Glassmorphism Classes */
+    .glass-card {
+      background: rgba(30, 41, 59, 0.4);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .neon-text-green {
+      text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+    }
+
+    .neon-text-red {
+      text-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
+    }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+  <div
+    class="hidden md:flex fixed left-0 top-0 h-full w-20 bg-[#0f141e] border-r border-gray-800 flex-col items-center py-6 z-50 cursor-pointer">
+    <div class="mb-10 text-cyan-400 text-3xl font-bold">
+      <i class="fa-solid fa-layer-group"></i>
+    </div>
+
+    <div class="space-y-8 flex flex-col w-full items-center">
+      <a href="#" title="Dashboard" class="text-cyan-400 p-3 rounded-xl bg-cyan-400/10"><i class="fa-solid fa-chart-line text-xl"></i></a>
+      <a href="#" title="Wallet" class="text-gray-500 hover:text-white transition"><i class="fa-solid fa-wallet text-xl"></i></a>
+      <a href="#" title="News" class="text-gray-500 hover:text-white transition"><i class="fa-regular fa-newspaper text-xl"></i></a>
+      <a href="#" title="Settings" class="text-gray-500 hover:text-white transition"><i class="fa-solid fa-gear text-xl"></i></a>
+    </div>
+  </div>
+
+  <div class="md:ml-20 p-6 min-h-screen">
+
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-2xl font-bold">Market Overview</h1>
+        <p class="text-gray-400 text-sm">Welcome back, Trader!</p>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="relative hidden sm:block">
+          <input type="text" placeholder="Search stocks..."
+            class="bg-[#151a25] border border-gray-700 rounded-lg py-2 px-4 pl-10 focus:outline-none focus:border-cyan-500 text-sm w-64">
+          <i class="fa-solid fa-search absolute left-3 top-3 text-gray-500 text-xs"></i>
+        </div>
+
+        <div
+          class="w-10 h-10 rounded-full bg-linear-to-tr from-pink-500 to-purple-800 flex items-center justify-center font-bold cursor-pointer">
+          U
+        </div>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="glass-card p-5 rounded-2xl hover:bg-slate-800/50 transition cursor-pointer">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex items-center gap-2">
+            <div class="p-2 bg-blue-500/20 rounded-lg text-blue-400"><i class="fa-brands fa-apple"></i></div>
+            <span class="font-bold text-lg">AAPL</span>
+          </div>
+          <span class="text-green-400 text-sm font-bold bg-green-500/10 px-2 py-1 rounded">+2.4%</span>
+        </div>
+        <h3 class="text-2xl font-bold mt-2">$178.35</h3>
+        <p class="text-gray-500 text-xs mt-1">Apple Inc.</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl hover:bg-slate-800/50 transition cursor-pointer">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex items-center gap-2">
+            <div class="p-2 bg-orange-500/20 rounded-lg text-orange-400"><i class="fa-brands fa-bitcoin"></i></div>
+            <span class="font-bold text-lg">BTC</span>
+          </div>
+          <span class="text-red-400 text-sm font-bold bg-red-500/10 px-2 py-1 rounded">-1.2%</span>
+        </div>
+        <h3 class="text-2xl font-bold mt-2">$42,150</h3>
+        <p class="text-gray-500 text-xs mt-1">Bitcoin</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl hover:bg-slate-800/50 transition cursor-pointer">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex items-center gap-2">
+            <div class="p-2 bg-purple-500/20 rounded-lg text-yellow cursor-pointer-400"><i class="fa-brands fa-google"></i></div>
+            <span class="font-bold text-lg">GOOGL</span>
+          </div>
+          <span class="text-green-400 text-sm font-bold bg-green-500/10 px-2 py-1 rounded">+0.8%</span>
+        </div>
+        <h3 class="text-2xl font-bold mt-2">$139.50</h3>
+        <p class="text-gray-500 text-xs mt-1">Alphabet Inc.</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl hover:bg-slate-800/50 transition cursor-pointer">
+        <div class="flex justify-between items-start mb-2">
+          <div class="flex items-center gap-2">
+            <div class="p-2 bg-green-500/20 rounded-lg text-green-400"><i class="fa-solid fa-dollar-sign"></i></div>
+            <span class="font-bold text-lg">TSLA</span>
+          </div>
+          <span class="text-green-400 text-sm font-bold bg-green-500/10 px-2 py-1 rounded">+5.1%</span>
+        </div>
+        <h3 class="text-2xl font-bold mt-2">$240.10</h3>
+        <p class="text-gray-500 text-xs mt-1">Tesla Inc.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <div class="lg:col-span-2 glass-card p-6 rounded-2xl">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold">Market Performance</h2>
+          <div class="flex gap-2 text-xs">
+            <button type="button" class="px-3 py-1 rounded bg-cyan-500 text-white font-bold cursor-pointer">1D</button>
+            <button type="button" class="px-3 py-1 rounded bg-slate-800 text-gray-400 hover:text-white cursor-pointer">1W</button>
+            <button type="button" class="px-3 py-1 rounded bg-slate-800 text-gray-400 hover:text-white cursor-pointer">1M</button>
+            <button type="button" class="px-3 py-1 rounded bg-slate-800 text-gray-400 hover:text-white cursor-pointer">1Y</button>
+          </div>
+        </div>
+        <div class="relative h-72 w-full">
+          <canvas id="stockChart"></canvas>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl">
+        <h2 class="text-xl font-bold mb-4">Watchlist</h2>
+        <div class="space-y-4">
+
+          <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+            <div class="flex items-center gap-3 cursor-pointer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+                alt="Microsoft logo" class="w-8 h-8 p-1 bg-white rounded-full">
+              <div>
+                <h4 class="font-bold">MSFT</h4>
+                <p class="text-xs text-gray-500">Microsoft</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-bold">$330.00</p>
+              <p class="text-xs text-green-400 neon-text-green">+1.2%</p>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center border-b border-gray-800 pb-3 cursor-pointer">
+            <div class="flex items-center gap-3">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Ethereum_logo_2014.svg"
+                alt="Ethereum logo" class="w-8 h-8 p-1 bg-white rounded-full">
+              <div>
+                <h4 class="font-bold">ETH</h4>
+                <p class="text-xs text-gray-500">Ethereum</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-bold">$2,250</p>
+              <p class="text-xs text-red-400 neon-text-red">-0.5%</p>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center border-b border-gray-800 pb-3 cursor-pointer">
+            <div class="flex items-center gap-3">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+                alt="Amazon logo" class="w-8 h-8 p-1 bg-white rounded-full">
+              <div>
+                <h4 class="font-bold">AMZN</h4>
+                <p class="text-xs text-gray-500">Amazon</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-bold">$145.20</p>
+              <p class="text-xs text-green-400 neon-text-green">+0.9%</p>
+            </div>
+          </div>
+
+          <button type="button"
+            class="w-full mt-4 py-3 rounded-xl border border-dashed border-gray-600 text-gray-400 hover:border-cyan-400 hover:text-cyan-400 transition text-sm cursor-pointer">
+            + Add New Asset
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-[#0f141e] border-t border-gray-800 pt-16 pb-8 mt-10 relative overflow-hidden md:ml-16">
+  
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none">
+    </div>
+  
+    <div class="container mx-auto px-6 relative z-10">
+  
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+  
+        <div>
+          <a href="#" title="TradeX Home" class="text-2xl font-bold text-white flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-layer-group text-cyan-400"></i>
+            Trade<span class="text-cyan-400">X</span>
+          </a>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            Real-time stock market data, advanced charts, and portfolio tracking tools for modern traders.
+          </p>
+          <div class="flex gap-4">
+            <a href="https://www.facebook.com/atulkumar.paul.71" target="_blank" title="Facebook"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-cyan-500 hover:text-white transition-all duration-300 hover:-translate-y-1">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://x.com/paulatul020" target="_blank" title="Twitter"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-cyan-500 hover:text-white transition-all duration-300 hover:-translate-y-1">
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/paul-atul" target="_blank" title="LinkedIn"
+              class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-cyan-500 hover:text-white transition-all duration-300 hover:-translate-y-1">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+  
+        <div>
+          <h3 class="text-white font-bold text-lg mb-6">Platform</h3>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Market Overview</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Trading Analysis</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Screeners</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Mobile App</a></li>
+          </ul>
+        </div>
+  
+        <div>
+          <h3 class="text-white font-bold text-lg mb-6">Support</h3>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Help Center</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">API Documentation</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Fees & Charges</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Security</a></li>
+          </ul>
+        </div>
+  
+        <div>
+          <h3 class="text-white font-bold text-lg mb-6">Market Updates</h3>
+          <p class="text-gray-400 text-sm mb-4">Get the latest signals directly to your inbox.</p>
+          <form class="space-y-3">
+            <input type="email" placeholder="Your email address"
+              class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-gray-500">
+            <button type="button"
+              class="w-full cursor-pointer bg-linear-to-r from-pink-500 to-purple-600 text-white font-bold py-3 rounded-lg hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all transform hover:scale-[1.02]">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+  
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-500 text-sm">&copy; 2024 TradeX Inc. All rights reserved.</p>
+        <div class="flex gap-6 text-sm text-gray-500">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="https://atulpaul.vercel.app" target="_blank" class="text-md font-bold bg-gradient-to-r from-pink-300 to-purple-700 bg-clip-text text-transparent animate-bounce cursor-pointer ">Atul Paul </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const ctx = document.getElementById('stockChart').getContext('2d');
+
+    // Create Gradient for the Chart
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(6, 182, 212, 0.5)'); // Cyan Top
+    gradient.addColorStop(1, 'rgba(6, 182, 212, 0)');   // Transparent Bottom
+
+    const stockChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM'],
+        datasets: [{
+          label: 'Portfolio Value',
+          data: [150, 155, 148, 160, 158, 165, 170],
+          borderColor: '#06b6d4', // Cyan Line
+          backgroundColor: gradient,
+          borderWidth: 3,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: '#06b6d4',
+          pointHoverRadius: 6,
+          fill: true,
+          tension: 0.4 // Smooth Curves
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false // Hide Legend
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+            titleColor: '#fff',
+            bodyColor: '#cbd5e1',
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.05)'
+            },
+            ticks: {
+              color: '#94a3b8'
+            }
+          },
+          y: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.05)'
+            },
+            ticks: {
+              color: '#94a3b8',
+              callback: function (value) {
+                return '$' + value;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
