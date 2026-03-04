@@ -5,8 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TradeX - Live Stock Tracker</title>
-
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
    <link rel="stylesheet" href="src/output.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,7 +21,6 @@
       color: #ffffff;
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -299,10 +296,9 @@
   <script>
     const ctx = document.getElementById('stockChart').getContext('2d');
 
-    // Create Gradient for the Chart
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, 'rgba(6, 182, 212, 0.5)'); // Cyan Top
-    gradient.addColorStop(1, 'rgba(6, 182, 212, 0)');   // Transparent Bottom
+    gradient.addColorStop(0, 'rgba(6, 182, 212, 0.5)');
+    gradient.addColorStop(1, 'rgba(6, 182, 212, 0)');
 
     const stockChart = new Chart(ctx, {
       type: 'line',
@@ -311,14 +307,14 @@
         datasets: [{
           label: 'Portfolio Value',
           data: [150, 155, 148, 160, 158, 165, 170],
-          borderColor: '#06b6d4', // Cyan Line
+          borderColor: '#06b6d4', 
           backgroundColor: gradient,
           borderWidth: 3,
           pointBackgroundColor: '#fff',
           pointBorderColor: '#06b6d4',
           pointHoverRadius: 6,
           fill: true,
-          tension: 0.4 // Smooth Curves
+          tension: 0.4 
         }]
       },
       options: {
@@ -326,7 +322,7 @@
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false // Hide Legend
+            display: false 
           },
           tooltip: {
             mode: 'index',
